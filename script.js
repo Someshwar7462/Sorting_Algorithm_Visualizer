@@ -70,7 +70,8 @@ function play(algorithm) {
     } else if (algorithm === "merge") {
         moves = mergeSort(copy);
     } else if (algorithm === "quick") {
-        moves = quickSort(copy, 0, copy.length - 1);
+        moves=[];
+        moves = quickSort(copy, 0, copy.length - 1,moves);
     }
     Animate(moves);
 }
@@ -213,8 +214,8 @@ function mergeSort(arr) {
     return moves;
 }
 // Quick Sort
-function quickSort(arr, low, high) {
-    const moves = [];
+function quickSort(arr, low, high, moves) {
+    //const moves = [];
     if (low < high) {
         const pivot = arr[high];
         let i = low - 1;
@@ -229,8 +230,8 @@ function quickSort(arr, low, high) {
         [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
         moves.push({ indices: [i + 1, high], type: "swap" });
 
-        quickSort(arr, low, i);
-        quickSort(arr, i + 2, high);
+        quickSort(arr, low, i,moves);
+        quickSort(arr, i + 2, high,moves);
     }
     return moves;
 }
